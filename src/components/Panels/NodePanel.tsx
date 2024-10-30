@@ -1,4 +1,5 @@
 import React from "react";
+import messageBlue from "../../assets/msg-blue.svg";
 
 /**
  * NodePanel component that allows users to drag and drop nodes into the flow.
@@ -19,10 +20,14 @@ const NodePanel: React.FC = () => {
 
   return (
     <div className="node-panel">
-      <div className="message-container" onDragStart={(event) => onDragStart(event, "textNode")} draggable>
+      <div
+        className="message-container"
+        onDragStart={(event) => onDragStart(event, "textNode")}
+        draggable
+      >
         <div className="message">
           <div className="message-icon-container">
-            <img src="src/assets/msg-blue.svg" width="25px" alt="Message Icon" />
+            <img src={messageBlue} width="25px" alt="Message Icon" />
             <div>Message</div>
           </div>
         </div>

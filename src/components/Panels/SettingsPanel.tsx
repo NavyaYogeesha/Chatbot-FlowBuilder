@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Node } from "reactflow";
+import backArrow from "../../assets/ic--outline-arrow-back.svg";
 
 type SettingsPanelProps = {
   /**
@@ -31,7 +32,12 @@ type SettingsPanelProps = {
  * @param {SettingsPanelProps} props - The props for the component.
  * @returns {JSX.Element} The rendered SettingsPanel component.
  */
-const SettingsPanel: React.FC<SettingsPanelProps> = ({ selectedNode, onNodeChange, onSave, setSelectedNode }) => {
+const SettingsPanel: React.FC<SettingsPanelProps> = ({
+  selectedNode,
+  onNodeChange,
+  onSave,
+  setSelectedNode,
+}) => {
   // State to manage the text input.
   const [text, setText] = useState(selectedNode.data.label);
 
@@ -64,7 +70,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ selectedNode, onNodeChang
     <div className="settings-panel">
       <div className="edit-header">
         <div className="edit-header-content">
-          <img src="src/assets/ic--outline-arrow-back.svg" onClick={handleBackClick} alt="Back" />
+          <img src={backArrow} onClick={handleBackClick} alt="Back" />
           <div>Message</div>
         </div>
       </div>
