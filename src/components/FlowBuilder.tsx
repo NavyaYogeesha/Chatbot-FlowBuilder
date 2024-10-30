@@ -1,8 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useCallback } from "react";
-import ReactFlow, { addEdge, Background, Controls, useEdgesState, useNodesState, Connection, Edge, Node, ReactFlowInstance, Position, MarkerType } from "reactflow";
+import ReactFlow, {
+  addEdge,
+  Background,
+  Controls,
+  useEdgesState,
+  useNodesState,
+  Connection,
+  Edge,
+  Node,
+  ReactFlowInstance,
+  Position,
+  MarkerType,
+} from "reactflow";
 import "reactflow/dist/style.css";
 
-import TextNode from "./TextNode";
+import TextNode from "./Node/TextNode";
 import SaveButton from "./SaveButton";
 
 type FlowBuilderProps = {
@@ -13,29 +26,46 @@ type FlowBuilderProps = {
 
 const nodeTypes = { textNode: TextNode };
 
-const FlowBuilder: React.FC<FlowBuilderProps> = ({ nodes, setNodes, setSelectedNode }) => {
+const FlowBuilder: React.FC<FlowBuilderProps> = ({
+  nodes,
+  setNodes,
+  setSelectedNode,
+}) => {
   const [internalNodes, setInternalNodes, onNodesChange] = useNodesState(nodes); // Use internal state for draggable nodes
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const reactFlowWrapper = React.useRef<HTMLDivElement>(null);
-  const [reactFlowInstance, setReactFlowInstance] = React.useState<ReactFlowInstance | null>(null);
+  const [reactFlowInstance, setReactFlowInstance] =
+    React.useState<ReactFlowInstance | null>(null);
 
   /**
    * Function used to connect/draw edges from one node to another
    * marker end propert defined to give pointer edges
    */
-  const onConnect = useCallback((params: Edge | Connection) => setEdges((eds) => addEdge( {
-    ...params,
-    markerEnd: { type: MarkerType.Arrow }, // Adds an arrow pointer to new edges
-  }, eds)), [setEdges]);
+  const onConnect = useCallback(
+    (params: Edge | Connection) =>
+      setEdges((eds) =>
+        addEdge(
+          {
+            ...params,
+            markerEnd: { type: MarkerType.Arrow }, // Adds an arrow pointer to new edges
+          },
+          eds
+        )
+      ),
+    [setEdges]
+  );
 
-  const onInit = useCallback((rfi: ReactFlowInstance) => setReactFlowInstance(rfi), []);
+  const onInit = useCallback(
+    (rfi: ReactFlowInstance) => setReactFlowInstance(rfi),
+    []
+  );
 
   /**
    * This will show the settings panel which allows to edit the text on click of any node.
-   * @param event 
-   * @param node 
+   * @param event
+   * @param node
    */
-  const onNodeClick = (event: React.MouseEvent, node: Node) => {
+  const onNodeClick = (_event: React.MouseEvent, node: Node) => {
     setSelectedNode(node);
   };
 
@@ -43,9 +73,9 @@ const FlowBuilder: React.FC<FlowBuilderProps> = ({ nodes, setNodes, setSelectedN
     setInternalNodes(nodes);
   }, [nodes]);
 
- /**
-  *  Handle node drag and drop within the flow area
-  */
+  /**
+   *  Handle node drag and drop within the flow area
+   */
   const onDrop = useCallback(
     (event: React.DragEvent) => {
       event.preventDefault();
@@ -59,7 +89,7 @@ const FlowBuilder: React.FC<FlowBuilderProps> = ({ nodes, setNodes, setSelectedN
           x: event.clientX - reactFlowBounds.left,
           y: event.clientY - reactFlowBounds.top,
         });
-        const newNode = {
+        const newNode: Node = {
           id: `${internalNodes.length + 1}`,
           type: "textNode",
           position,
@@ -67,8 +97,9 @@ const FlowBuilder: React.FC<FlowBuilderProps> = ({ nodes, setNodes, setSelectedN
           sourcePosition: Position.Right, // optional, to allow defining edge connections
           targetPosition: Position.Left,
         };
-        setInternalNodes((nds) => [...nds, newNode]);
-        setNodes((nds) => [...nds, newNode]);
+        const updatedNodes = [...internalNodes, newNode];
+        setInternalNodes(updatedNodes);
+        setNodes(updatedNodes);
       }
     },
     [reactFlowInstance, setNodes, internalNodes.length]
@@ -76,7 +107,7 @@ const FlowBuilder: React.FC<FlowBuilderProps> = ({ nodes, setNodes, setSelectedN
 
   /**
    * Handles the drag over on mouse leave
-   * @param event 
+   * @param event
    */
   const onDragOver = (event: React.DragEvent) => {
     event.preventDefault();
@@ -84,12 +115,16 @@ const FlowBuilder: React.FC<FlowBuilderProps> = ({ nodes, setNodes, setSelectedN
   };
 
   return (
-    <div className="flow-builder" ref={reactFlowWrapper} style={{ height: "100vh" }}>
+    <div
+      className="flow-builder"
+      ref={reactFlowWrapper}
+      style={{ height: "100vh" }}
+    >
       <SaveButton nodes={nodes} edges={edges} />
       <ReactFlow
         nodes={internalNodes}
         edges={edges}
-        onNodesChange={onNodesChange} 
+        onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         onNodeClick={onNodeClick}
