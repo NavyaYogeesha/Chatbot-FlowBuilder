@@ -1,0 +1,135 @@
+/* Add these styles to App.css */
+.app-container {
+  display: flex;
+  height: 100vh;
+  margin-top: 60px;
+  background-color: #fff;
+}
+
+.node-panel,
+.settings-panel {
+  width: 400px;
+  /* padding: 10px; */
+  background-color: #f7f7f7;
+  border: 1px solid #787a7a;
+}
+.node {
+  width: 100%;
+  display: flex;
+}
+.message {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+.flow-builder {
+  flex: 1;
+}
+
+.message-container {
+  color: #162273;
+  border: 1px solid #162273;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 80px;
+  border-radius: 10px;
+  margin: 10px;
+}
+.text-node {
+  width: 300px;
+  min-height: 60px;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.text-node-header {
+  background-color: #a8ede7;
+  height: 20px;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  padding: 2px;
+}
+.text-node-body {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  min-height: 30px;
+}
+
+.edit-header {
+  width: 100%;
+  background-color: #fff;
+  height: 40px;
+  padding: 10px 0;
+  border-bottom: 1px solid #787a7a;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+}
+.edit-header-content {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+
+.edit-body {
+  min-height: 60px;
+  padding: 10px;
+  color: #787a7a;
+  border-bottom: 1px solid #787a7a;
+}
+
+.text-area {
+  margin: 20px 0;
+  width: 98%;
+  border: 1px solid #787a7a;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.message-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+button {
+  position: absolute;
+  top: 18px;
+  right: 60px;
+  width: 120px;
+  border-radius: 10px;
+  height: 30px;
+  color: #162273;
+  border: 1px solid #162273;
+  font-weight: bold;
+  outline: none;
+}
+body {
+  background-color: #bdbfbe;
+}
